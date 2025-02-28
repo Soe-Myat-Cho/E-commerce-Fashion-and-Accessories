@@ -18,14 +18,29 @@
             <li><a href="#" class="hover:text-gray-500">Categories</a></li>
             <li><a href="/products" class="hover:text-gray-500">Products</a></li>
             <li><a href="#contact" class="hover:text-gray-500">Contact</a></li>
+
         </ul>
+        @if (!Auth::user())
+        <ul class="flex gap-6">
+            <li><a href="/sign_up" class="hover:text-gray-500">Sign up</a></li>
+            <li><a href="/login" class="hover:text-gray-500">Login</a></li>
+        </ul>
+        @endif
+
+        @if (Auth::user())
+        <div class="flex gap-10">
+            <p>Hello, {{Auth::user()->name}}</p>
+            <a href="/logout" class="hover:text-gray-500">Logout</a>
+        </div>
+        @endif
+
     </nav>
 
 
     {{$slot}}
 
     <!-- Footer -->
-    <footer id="contact" class="bg-gray-900 text-white text-center p-10 mt-12 ">
+    <footer id="contact" class="bg-gray-900 text-white text-center p-10 ">
         <p>& copy; 2025 ShopMinimal. All rights reserved.</p>
     </footer>
 
