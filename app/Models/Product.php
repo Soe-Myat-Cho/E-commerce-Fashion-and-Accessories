@@ -15,4 +15,10 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    //a product has one cart item
+    public function cartItem()
+    {
+        return $this->hasOne(CartItem::class, 'product_id');
+    }
 }

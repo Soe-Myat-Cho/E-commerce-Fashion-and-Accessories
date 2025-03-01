@@ -45,4 +45,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    //a user has one cart
+    public function cart()
+    {
+        return $this->hasOne(Cart::class, 'user_id');
+    }
 }

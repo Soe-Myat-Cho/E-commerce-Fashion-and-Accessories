@@ -13,6 +13,7 @@
     <!-- Navbar -->
     <nav class="bg-white shadow-md px-6 py-8 flex justify-between items-center fixed top-0 w-full">
         <h1 class="text-3xl font-semibold "><a href="/">Elegance</a></h1>
+
         <ul class="flex gap-6">
             <li><a href="/" class="hover:text-gray-500">Home</a></li>
             <li><a href="#" class="hover:text-gray-500">Categories</a></li>
@@ -20,20 +21,32 @@
             <li><a href="#contact" class="hover:text-gray-500">Contact</a></li>
 
         </ul>
-        @if (!Auth::user())
-        <ul class="flex gap-6">
-            <li><a href="/sign_up" class="hover:text-gray-500">Sign up</a></li>
-            <li><a href="/login" class="hover:text-gray-500">Login</a></li>
-        </ul>
-        @endif
 
-        @if (Auth::user())
-        <div class="flex gap-10">
-            <p>Hello, {{Auth::user()->name}}</p>
-            <a href="/logout" class="hover:text-gray-500">Logout</a>
+        <div class="flex items-center gap-8">
+            <!-- Cart Icon with Item Count -->
+            <a href="/cart" class="relative hover:text-gray-500">
+                🛒
+                @auth
+                <span class="absolute -top-2 -right-3 bg-gray-100 text-gray-900 text-xs font-bold px-2 py-1 rounded-full border-red-900 ">
+                    {{ Auth::user()->cart?->cart_items->count() }}
+                </span>
+                @endauth
+            </a>
+
+            @if (!Auth::user())
+            <ul class="flex gap-6">
+                <li><a href="/sign_up" class="hover:text-gray-500">Sign up</a></li>
+                <li><a href="/login" class="hover:text-gray-500">Login</a></li>
+            </ul>
+            @endif
+
+            @if (Auth::user())
+            <div class="flex gap-10">
+                <p>Hello, {{ Auth::user()->name }}</p>
+                <a href="/logout" class="hover:text-gray-500">Logout</a>
+            </div>
+            @endif
         </div>
-        @endif
-
     </nav>
 
 

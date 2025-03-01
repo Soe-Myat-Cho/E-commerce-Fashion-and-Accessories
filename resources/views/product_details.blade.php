@@ -23,8 +23,10 @@
                     <p class="mt-1 text-md  text-gray-600 line-through">${{$product->price}}</p>
                     @endif
                 </div>
-                <button class="mt-6 bg-gray-900 text-white px-6 py-2 rounded-lg">Add to Cart</button>
-
+                <form action="/products/{{$product->id}}/addToCart" method="post">
+                    @csrf
+                    <button class="mt-6 bg-gray-900 text-white px-6 py-2 rounded-lg hover:bg-gray-800">Add to Cart</button>
+                </form>
 
                 <!-- Additional Details -->
                 <div class="mt-6">

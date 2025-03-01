@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\CartItem;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -22,10 +24,11 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        User::factory(10)->create();
 
         Category::factory(5)->create();
 
         Product::factory(10)->create();
+
+        User::factory(5)->has(Cart::factory()->has(CartItem::factory(3), 'cart_items'))->create();
     }
 }
