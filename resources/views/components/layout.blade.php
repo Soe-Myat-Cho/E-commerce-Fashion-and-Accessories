@@ -27,9 +27,11 @@
             <a href="/cart" class="relative hover:text-gray-500">
                 🛒
                 @auth
+                @if (Auth::user()->cart?->cart_items->count() > 0)
                 <span class="absolute -top-2 -right-3 bg-gray-100 text-gray-900 text-xs font-bold px-2 py-1 rounded-full border-red-900 ">
                     {{ Auth::user()->cart?->cart_items->count() }}
                 </span>
+                @endif
                 @endauth
             </a>
 

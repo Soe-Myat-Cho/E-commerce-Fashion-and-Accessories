@@ -21,4 +21,10 @@ class Product extends Model
     {
         return $this->hasOne(CartItem::class, 'product_id');
     }
+
+    //a product has one order item
+    public function orderItem()
+    {
+        return $this->hasOne(OrderItem::class, 'product_id');
+    }
 }

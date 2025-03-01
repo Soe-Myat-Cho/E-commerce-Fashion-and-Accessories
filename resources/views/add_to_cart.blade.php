@@ -40,18 +40,30 @@
             <p class="text-gray-700 text-center text-xl font-semibold  ">Your cart is empty.</p>
             @endif
             @endauth
-            <p class="text-gray-700 text-center text-xl font-semibold  ">Your cart is empty.</p>
+
 
         </div>
 
         <!-- Cart Summary -->
         @auth
         @if($cartItems)
-        <div class="mt-6 text-right">
+        <div class="mt-6 text-right ">
+
             <h3 class="text-xl font-semibold">Total: ${{$totalPrice}}</h3>
-            <button class="mt-4 bg-gray-900 text-white px-6 py-2 rounded hover:bg-gray-700">
-                Proceed to Checkout
-            </button>
+            <form action="/products/checkout" method="post" class="">
+                <!-- hidden input for total price -->
+                <input type="text" name="totalPrice" value="{{$totalPrice}}" hidden class="w-full p-2 border">
+
+                <div class="mt-4">
+
+                    <textarea id="orderNotes" name="shipping_address" class="w-full p-2 border " rows="8" placeholder="Enter your shipping address"></textarea>
+                </div>
+
+                @csrf
+                <button class="mt-4 bg-gray-900 text-white px-6 py-2 rounded hover:bg-gray-700">
+                    Proceed to Checkout
+                </button>
+            </form>
         </div>
         @endif
         @endauth
