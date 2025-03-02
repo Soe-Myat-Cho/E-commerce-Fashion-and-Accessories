@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
@@ -42,3 +43,20 @@ Route::post('/products/{product}/addToCart', [CartController::class, 'addToCart'
 Route::post('/products/{cartItem}/removeFromCart', [CartController::class, 'removeFromCart']);
 
 Route::post('/products/checkout', [OrderController::class, 'order'])->middleware(MustBeLoginUser::class);
+
+//---------------------admin routes-------------------- //
+Route::get('/admin/dashboard', function () {
+    return view('admin.dashboard');
+});
+
+Route::get('/admin/order_list', [OrderController::class, 'orderList']);
+Route::get('/admin/customers', [AdminController::class, 'customerList']);
+Route::get('/admin/inventory', [AdminController::class, 'inventory']);
+
+Route::post('/admin/product/{product}/delete', [AdminController::class, 'removeProduct']);
+
+Route::get('/admin/product/{product}/edit', [AdminController::class, 'showEditForm']);
+Route::post('/admin/product/{product}/edit', [AdminController::class, 'updateProduct']);
+
+Route::get('/admin/product/add', [AdminController::class, 'showAddForm']);
+Route::post('/admin/product/add', [AdminController::class, 'addProduct']);

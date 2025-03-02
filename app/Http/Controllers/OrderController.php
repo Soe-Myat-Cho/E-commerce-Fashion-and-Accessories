@@ -42,4 +42,11 @@ class OrderController extends Controller
 
         return view('/add_to_cart');
     }
+
+    //---------------------admin routes------------------------//
+    public function orderList()
+    {
+        $orders = Order::all()->load('user');
+        return view('admin.order_list', ['orders' => $orders]);
+    }
 }
