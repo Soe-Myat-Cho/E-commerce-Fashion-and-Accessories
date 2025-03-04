@@ -18,8 +18,8 @@ Route::get('/welcome', function () {
 
 Route::get('/', function () {
     return view('home', [
-        'products' => Product::paginate(4),
-        'categories' => Category::paginate(3)
+        'products' => Product::simplepaginate(4),
+        'categories' => Category::simplepaginate(3)
     ]);
 });
 

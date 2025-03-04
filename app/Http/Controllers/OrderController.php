@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderMail;
 
 class OrderController extends Controller
 {
@@ -40,7 +42,9 @@ class OrderController extends Controller
 
         Auth::user()->cart->cart_items()->delete();
 
-        return view('/add_to_cart');
+        Mail::to(Auth::user()->email)->queue(new OrderMail(Auth::user()->name, Auth::user()->email, $order->total_price, $order->shipping_address));
+
+        return redirect('/cart');
     }
 
     //---------------------admin routes------------------------//

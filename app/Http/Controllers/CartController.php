@@ -34,7 +34,7 @@ class CartController extends Controller
         $cart_items->product_id = $product->id;
         $cart_items->save();
 
-        return view('/add_to_cart');
+        return redirect('/cart');
     }
 
     public function removeFromCart(CartItem $cartItem)
@@ -43,6 +43,6 @@ class CartController extends Controller
         //$cartItem = Auth::user()->cart->cart_items()->where('product_id', $cartItem->id)->first();
         //dd($cartItem);
         $cartItem->delete();
-        return view('/add_to_cart');
+        return redirect('/cart');
     }
 }
